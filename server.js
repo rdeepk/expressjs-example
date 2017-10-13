@@ -37,7 +37,7 @@ app.get('/goodbye', function (req, res) {
 })
 
 app.get('/json', function (req, res) {
-    let json = {name:"hello"};
+    //let json = {name:"hello"};
     res.json(json);
 })
 
@@ -56,3 +56,8 @@ app.get('/sum', function(req, res) {
     }
     res.send("The sum of 1 to "+ n + " is: <strong>"+ sum +"</strong>");
 })
+//this error handler should be at the end of all middleware and handlers so that all errors can fall back on it.
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
