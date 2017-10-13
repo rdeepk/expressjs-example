@@ -13,7 +13,10 @@ app.get('/', function (req, res) {
 })
 
 app.get('/randomnumber', function (req, res) {
-    res.send((Math.floor(Math.random()*10)).toString());
+    //use url /randomnumber?range=40
+    let range = req.query.range;
+    let random = (Math.floor(Math.random()*range));
+    res.send("Random number between 0 to "+ range + "is: "+ random.toString());
 })
 
 app.get('/goodbye', function (req, res) {
@@ -24,3 +27,15 @@ app.get('/goodbye', function (req, res) {
 app.listen(port, function(){
     console.log("Listening to: "+ port);
 });
+
+app.get('/sum', function(req, res) {
+    let n = req.query.n;
+    if(n=== '0') { //  every query string will be a string so 0 is not a number
+        res.status(500).send("cant sum 0");
+    }
+    let sum = 0;
+    for (i=0; i<= n; i++) {
+        sum += i;
+    }
+    res.send("The sum of 1 to "+ n + " is: "+ sum);
+})
