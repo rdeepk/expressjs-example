@@ -3,7 +3,8 @@ app = express(),
 port = process.argv[2] || 3000;
 
 //middleware - it will log date everytime a request is recieved
-app.use(function(req, res, next){
+// in app.use you can use path too but it is optional, if path is there this middleware will be applied to that page only
+app.use('/hello', function(req, res, next){
     console.log("Recieved request at "+ Date.now());
     next();
 })
